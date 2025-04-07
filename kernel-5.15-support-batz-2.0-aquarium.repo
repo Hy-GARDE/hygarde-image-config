@@ -1,0 +1,8 @@
+[hygarde-secure-redpesk_310872f5--redpesk-lts-batz-2.0-update-build]
+name=hygarde-secure-redpesk_310872f5--redpesk-lts-batz-2.0-update-build
+baseurl=https://aquarium-app.redpesk.bzh/kbuild/repos//hygarde-secure-redpesk_310872f5--redpesk-lts-batz-2.0-update-build/latest/\$basearch?token=5e10fc7f-247d-4917-84e4-a47e6c5d9b34_3b20b29b-99a1-465b-affc-21fe86db78af
+priority=1
+module_hotfixes=1
+skip_if_unavailable=True
+enabled=1
+gpgcheck=0
