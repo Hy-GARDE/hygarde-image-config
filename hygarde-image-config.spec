@@ -9,6 +9,9 @@ BuildArch: noarch
 
 BuildRequires: systemd-rpm-macros
 
+Requires: firewalld
+%{?systemd_requires}
+
 Source0: %{name}-%{version}.tar.gz
 
 %description
@@ -26,6 +29,7 @@ install -D -m 0644 systemd/system.slice.d/realtime.conf -t %{buildroot}%{_unitdi
 install -D -m 0644 systemd/user.slice.d/realtime.conf -t %{buildroot}%{_unitdir}/user.slice.d/
 install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
+install -D -m 0644 firewalld/* -t %{buildroot}%{_sysconfdir}/firewalld/zones/
 
 %files
 %{_unitdir}/afm-appli-helloworld-binding--main@.service.d/realtime.conf
@@ -34,9 +38,17 @@ install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
 %{_unitdir}/user.slice.d/realtime.conf
 %{_unitdir}/realtime.slice
 %{_unitdir}/var-tmp.mount
+%{_sysconfdir}/firewalld/zones/hygarde-{w,l}an.xml
+
+%post
+firewall-cmd --reload
+
+%postun
+firewall-cmd --reload
 
 %changelog
 * Fri Feb 27 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.0
+- Add firewalld zones config
 - Remove udev rule for ModemManager
 - Mount /var/tmp as tmpfs
 - Remove PostgreSQL 15 repository

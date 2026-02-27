@@ -10,6 +10,9 @@ while the helloworld-binding runs on core 2.
 
 A mount unit sets `/var/tmp` as a tmpfs with SMACK support.
 
+Two firewalld zones, assigned to the two Ethernet interfaces of the
+Hummingboard, set the right configuration for LAN and WAN both.
+
 ## Setup a Wifi access
 
 ```shell
