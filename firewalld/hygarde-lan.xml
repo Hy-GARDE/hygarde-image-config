@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone>
+  <!-- FIXME: remove SSH for prod -->
+  <service name="ssh"/>
+  <port port="443" protocol="tcp"/>
+  <port port="1234" protocol="tcp"/>
+  <interface name="end0"/>
+</zone>

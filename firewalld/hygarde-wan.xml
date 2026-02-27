@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone>
+  <!-- FIXME: remove SSH for prod -->
+  <service name="ssh"/>
+  <interface name="enp1s0"/>
+</zone>
