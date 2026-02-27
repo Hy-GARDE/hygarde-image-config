@@ -16,6 +16,8 @@ ports:
 A few systemd units associate all processes to CPU cores 0, 1 and 3
 while the helloworld-binding runs on core 2.
 
+A mount unit sets `/var/tmp` as a tmpfs with SMACK support.
+
 ## Setup cellular connection
 
 After flashing an image on the board, a few steps are required for the
