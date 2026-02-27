@@ -13,9 +13,6 @@ ports:
 - `/dev/ttyUSB3` is free and can be used to manually send AT commands
   to the Hummingboard's SIM.
 
-A repository containing PostgreSQL 15 is added to circumvent a bug on
-the default PostgreSQL version of redpesk Batz 2.0.
-
 A few systemd units associate all processes to CPU cores 0, 1 and 3
 while the helloworld-binding runs on core 2.
 

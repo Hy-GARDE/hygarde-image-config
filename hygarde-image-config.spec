@@ -21,7 +21,6 @@ Files needed for the Hummingboard to work according to HyGARDE's requirements
 
 %install
 install -D -m 0644 79-mm-quectel-ec25.rules -t %{buildroot}%{_sysconfdir}/udev/rules.d/
-install -D -m 0644 postgresql-15-batz-2.0-aquarium.repo -t %{buildroot}%{_sysconfdir}/yum.repos.d/
 install -D -m 0644 systemd/afm-appli-helloworld-binding--main@.service.d/realtime.conf -t %{buildroot}%{_unitdir}/afm-appli-helloworld-binding--main@.service.d/
 install -D -m 0644 systemd/init.scope.d/realtime.conf -t %{buildroot}%{_unitdir}/init.scope.d/
 install -D -m 0644 systemd/system.slice.d/realtime.conf -t %{buildroot}%{_unitdir}/system.slice.d/
@@ -30,7 +29,6 @@ install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 
 %files
 %{_sysconfdir}/udev/rules.d/79-mm-quectel-ec25.rules
-%{_sysconfdir}/yum.repos.d/postgresql-15-batz-2.0-aquarium.repo
 %{_unitdir}/afm-appli-helloworld-binding--main@.service.d/realtime.conf
 %{_unitdir}/init.scope.d/realtime.conf
 %{_unitdir}/system.slice.d/realtime.conf
@@ -39,6 +37,7 @@ install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 
 %changelog
 * Fri Feb 27 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.0
+- Remove PostgreSQL 15 repository
 - Rename package to hygarde-image-config
 
 * Mon Dec 16 2024 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.1.0

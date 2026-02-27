@@ -1,8 +1,0 @@
-[postgresql-15_8b162d9b--redpesk-lts-batz-2.0-update-build]
-name=postgresql-15_8b162d9b--redpesk-lts-batz-2.0-update-build
-baseurl=https://aquarium-app.redpesk.bzh/kbuild/repos//postgresql-15_8b162d9b--redpesk-lts-batz-2.0-update-build/latest/$basearch?token=17f7e84b-3e6e-47f6-b8aa-a186e7b5b7bb_92db3634-cf09-431d-9fde-5a6e6c4a7f18
-priority=1
-module_hotfixes=1
-skip_if_unavailable=True
-enabled=1
-gpgcheck=1
