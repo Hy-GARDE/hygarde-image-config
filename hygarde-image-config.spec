@@ -26,6 +26,7 @@ install -D -m 0644 systemd/init.scope.d/realtime.conf -t %{buildroot}%{_unitdir}
 install -D -m 0644 systemd/system.slice.d/realtime.conf -t %{buildroot}%{_unitdir}/system.slice.d/
 install -D -m 0644 systemd/user.slice.d/realtime.conf -t %{buildroot}%{_unitdir}/user.slice.d/
 install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
+install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
 
 %files
 %{_sysconfdir}/udev/rules.d/79-mm-quectel-ec25.rules
@@ -34,9 +35,11 @@ install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 %{_unitdir}/system.slice.d/realtime.conf
 %{_unitdir}/user.slice.d/realtime.conf
 %{_unitdir}/realtime.slice
+%{_unitdir}/var-tmp.mount
 
 %changelog
 * Fri Feb 27 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.0
+- Mount /var/tmp as tmpfs
 - Remove PostgreSQL 15 repository
 - Rename package to hygarde-image-config
 
