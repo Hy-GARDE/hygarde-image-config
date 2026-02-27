@@ -5,53 +5,10 @@ HyGARDE's requirements.
 
 ## Changes
 
-The following configuration is applied regarding the modem's serial
-ports:
-
-- `/dev/ttyUSB2` is used by ModemManager for managing cellular access
-  and cannot be used by anything else.
-- `/dev/ttyUSB3` is free and can be used to manually send AT commands
-  to the Hummingboard's SIM.
-
 A few systemd units associate all processes to CPU cores 0, 1 and 3
 while the helloworld-binding runs on core 2.
 
 A mount unit sets `/var/tmp` as a tmpfs with SMACK support.
-
-## Setup cellular connection
-
-After flashing an image on the board, a few steps are required for the
-4G internet access to work.
-
-Make sure you have inserted a valid SIM card (of which you know the PIN
-code if there is any) and an appropriate antenna is plugged to the main
-port of the modem. You also need to know your carrier's APN.
-
-This command is an all-in-one which creates a GSM connection associated
-to the modem and automatically set it up, even after a reboot:
-
-```shell
-[root@localhost ~]# nmcli connection add type gsm ifname ttyUSB2 autoconnect yes con-name quectel-lte apn <CARRIER APN> gsm.pin <SIM PIN>
-Connection 'quectel-lte' (c8e809bb-1d68-4451-bd6e-d2b5e9a884cc) successfully added.
-```
-
-> `nmcli connection` can be shortened to `nmcli conn`, as can be most
-> `nmcli` commands.
-
-Informations about the modem (mainly signal quality) can be shown:
-
-```shell
-[root@localhost ~]# mmcli -m 1
-...
-  --------------------------------
-  Status   |       unlock retries: sim-pin (3), sim-puk (10), sim-pin2 (3), sim-puk2 (10)
-           |                state: connected
-           |          power state: on
-           |          access tech: umts
-           |       signal quality: 0% (recent)
-  --------------------------------
-...
-```
 
 ## Setup a Wifi access
 
