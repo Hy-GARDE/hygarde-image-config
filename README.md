@@ -1,7 +1,7 @@
-# HyGARDE BSP config
+# HyGARDE image config
 
-This repo stores files needed for the Hummingboard Pulse to work
-according to HyGARDE's requirements.
+This repo stores files needed for the Hummingboard to work according to
+HyGARDE's requirements.
 
 ## Changes
 

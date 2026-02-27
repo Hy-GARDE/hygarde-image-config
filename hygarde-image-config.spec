@@ -1,10 +1,10 @@
-Name: hygarde-bsp-config
-Version: 1.1.0
+Name: hygarde-image-config
+Version: 1.2.0
 Release: 0%{?dist}
-Summary: hygarde-bsp-config
+Summary: HyGARDE Hummingboard configuration
 
 License: GPL-v3
-URL: https://github.com/Hy-GARDE/hygarde-bsp-config
+URL: https://github.com/Hy-GARDE/hygarde-image-config
 BuildArch: noarch
 
 BuildRequires: systemd-rpm-macros
@@ -12,7 +12,7 @@ BuildRequires: systemd-rpm-macros
 Source0: %{name}-%{version}.tar.gz
 
 %description
-%{summary}
+Files needed for the Hummingboard to work according to HyGARDE's requirements
 
 %prep
 %autosetup
@@ -38,6 +38,9 @@ install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 %{_unitdir}/realtime.slice
 
 %changelog
+* Fri Feb 27 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.0
+- Rename package to hygarde-image-config
+
 * Mon Dec 16 2024 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.1.0
 - Add PostgreSQL 15 repository
 - Add systemd configuration to isolate CPU core 2
