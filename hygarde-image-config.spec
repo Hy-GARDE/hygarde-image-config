@@ -41,10 +41,10 @@ install -D -m 0644 firewalld/* -t %{buildroot}%{_sysconfdir}/firewalld/zones/
 %{_sysconfdir}/firewalld/zones/hygarde-{w,l}an.xml
 
 %post
-firewall-cmd --reload
+firewall-cmd --reload || true
 
 %postun
-firewall-cmd --reload
+firewall-cmd --reload || true
 
 %changelog
 * Fri Feb 27 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.0
