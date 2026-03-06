@@ -1,5 +1,5 @@
 Name: hygarde-image-config
-Version: 1.2.1
+Version: 1.2.2
 Release: 0%{?dist}
 Summary: HyGARDE Hummingboard configuration
 
@@ -30,6 +30,7 @@ install -D -m 0644 systemd/user.slice.d/realtime.conf -t %{buildroot}%{_unitdir}
 install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
 install -D -m 0644 firewalld/* -t %{buildroot}%{_sysconfdir}/firewalld/zones/
+install -D -m 0644 firstboot/50-postgres.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 install -D -m 0644 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 
 %files
@@ -40,6 +41,7 @@ install -D -m 0644 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstate
 %{_unitdir}/realtime.slice
 %{_unitdir}/var-tmp.mount
 %{_sysconfdir}/firewalld/zones/hygarde-{w,l}an.xml
+%{_sharedstatedir}/rp-firstboot/50-postgres.sh
 %{_sharedstatedir}/rp-firstboot/90-fsverity-config.sh
 
 %post
@@ -49,7 +51,10 @@ firewall-cmd --reload || true
 firewall-cmd --reload || true
 
 %changelog
-* Thu Mar 4 2026 Valentin Geffroy <valentin.geffroy@iot.bzh> - 1.2.1
+* Fri Mar 6 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.2
+- Add PostgreSQL firstboot script
+
+* Thu Mar 5 2026 Valentin Geffroy <valentin.geffroy@iot.bzh> - 1.2.1
 - Add fsverity firstboot systemd script
 
 * Fri Feb 27 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.0

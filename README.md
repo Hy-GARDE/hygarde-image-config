@@ -13,7 +13,10 @@ A mount unit sets `/var/tmp` as a tmpfs with SMACK support.
 Two firewalld zones, assigned to the two Ethernet interfaces of the
 Hummingboard, set the right configuration for LAN and WAN both.
 
-A "firstboot" script is provided to setup fs-verity file protection.
+"Firstboot" scripts are provided to:
+
+- setup fs-verity file protection;
+- configure and initialize the PostgreSQL cluster.
 
 ## Setup a Wifi access
 
