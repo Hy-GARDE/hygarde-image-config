@@ -30,8 +30,8 @@ install -D -m 0644 systemd/user.slice.d/realtime.conf -t %{buildroot}%{_unitdir}
 install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
 install -D -m 0644 firewalld/* -t %{buildroot}%{_sysconfdir}/firewalld/zones/
-install -D -m 0644 firstboot/50-postgres.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
-install -D -m 0644 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
+install -D -m 0755 firstboot/50-postgres.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
+install -D -m 0755 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 
 %files
 %{_unitdir}/afm-appli-helloworld-binding--main@.service.d/realtime.conf
