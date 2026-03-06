@@ -25,6 +25,9 @@ FILES_TO_PROTECT="
 /etc/shadow
 /etc/sudoers
 /etc/fstab
+/etc/yum.repos.d/hygarde_dfb1e502--redpesk-lts-corn-3.0-update-build.repo
+/etc/yum.repos.d/hygarde-hummingboard_5a46cd3a--redpesk-lts-corn-3.0-update-build.repo
+/etc/yum.repos.d/redpesk.repo
 "
 
 # Add PostgreSQL files if exist
