@@ -10,14 +10,22 @@ set -e
 # create Postgres data dir
 echo "firstboot PostgreSQL: create data dir"
 mkdir -p /data/pgsql/data
-chown --recursive postgres:postgres /data/pgsql
-chmod --recursive 700 /data/pgsql
+
+# Allow root and postgres full access temporarily
+chmod 777 /data/pgsql
+chmod 777 /data/pgsql/data
+chown postgres:postgres /data/pgsql/data
 
 # init and tune database
 echo "firstboot PostgreSQL: init and tune cluster"
 /usr/sbin/postgresql-new-systemd-unit --unit postgresql@hygarde --datadir=/data/pgsql/data
 postgresql-setup --initdb --unit postgresql@hygarde --port 5432
 timescaledb-tune -yes -conf-path /data/pgsql/data/postgresql.conf
+
+# now set secure permissions
+echo "set secure permissions"
+chown --recursive postgres:postgres /data/pgsql
+chmod --recursive 700 /data/pgsql
 
 # apply changes
 echo "firstboot PostgreSQL: apply changes and remove tools"

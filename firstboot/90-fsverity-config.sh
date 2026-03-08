@@ -119,6 +119,7 @@ do
         continue
     fi
 
+    echo "fsverity sign $file..."
     fsverity sign \
         "$file" \
         "$SIG_DIR/${filename}.sig" \
