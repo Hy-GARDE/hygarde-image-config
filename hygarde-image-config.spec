@@ -1,5 +1,5 @@
 Name: hygarde-image-config
-Version: 1.2.2
+Version: 1.2.3
 Release: 0%{?dist}
 Summary: HyGARDE Hummingboard configuration
 
@@ -31,6 +31,7 @@ install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
 install -D -m 0644 firewalld/* -t %{buildroot}%{_sysconfdir}/firewalld/zones/
 install -D -m 0755 firstboot/50-postgres.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
+install -D -m 0755 firstboot/80-disable-ssh.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 install -D -m 0755 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 
 %files
@@ -42,6 +43,7 @@ install -D -m 0755 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstate
 %{_unitdir}/var-tmp.mount
 %{_sysconfdir}/firewalld/zones/hygarde-{w,l}an.xml
 %{_sharedstatedir}/rp-firstboot/50-postgres.sh
+%{_sharedstatedir}/rp-firstboot/80-disable-ssh.sh
 %{_sharedstatedir}/rp-firstboot/90-fsverity-config.sh
 
 %post
@@ -51,6 +53,9 @@ firewall-cmd --reload || true
 firewall-cmd --reload || true
 
 %changelog
+* Mon Mar 9 2026 Sebastien Douheret <sebastien.douheret@iot.bzh > - 1.2.3
+- Disable ssh as root
+
 * Fri Mar 6 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.2
 - Add PostgreSQL firstboot script
 
