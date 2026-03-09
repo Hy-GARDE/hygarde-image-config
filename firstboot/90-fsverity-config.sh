@@ -98,6 +98,7 @@ fi
 
 # Add the certificate (public key) in the Kernel keyrings (keys storage)
 openssl x509 -in "$CERT_DIR/cert.pem" -out "$CERT_DIR/cert.der" -outform der
+chmod 400 "$CERT_DIR/cert.der"
 if ! keyctl list %keyring:.fs-verity 2>/dev/null | grep -q "IOT_SAFE_CA"; then
     keyctl padd asymmetric '' %keyring:.fs-verity < "$CERT_DIR/cert.der"
 fi
@@ -131,5 +132,8 @@ do
 
     echo "Protection done on "$file" which is now read-only"
 done
+
+# Enable the service which loads the certificate at every boot
+systemctl enable fsverity-cert.service
 
 exit 0

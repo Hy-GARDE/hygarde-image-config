@@ -1,5 +1,5 @@
 Name: hygarde-image-config
-Version: 1.2.3
+Version: 1.2.4
 Release: 0%{?dist}
 Summary: HyGARDE Hummingboard configuration
 
@@ -29,6 +29,7 @@ install -D -m 0644 systemd/system.slice.d/realtime.conf -t %{buildroot}%{_unitdi
 install -D -m 0644 systemd/user.slice.d/realtime.conf -t %{buildroot}%{_unitdir}/user.slice.d/
 install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
+install -m 0644 systemd/fsverity-cert.service %{buildroot}%{_unitdir}
 install -D -m 0644 firewalld/* -t %{buildroot}%{_sysconfdir}/firewalld/zones/
 install -D -m 0755 firstboot/50-postgres.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 install -D -m 0755 firstboot/80-disable-ssh.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
@@ -41,6 +42,7 @@ install -D -m 0755 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstate
 %{_unitdir}/user.slice.d/realtime.conf
 %{_unitdir}/realtime.slice
 %{_unitdir}/var-tmp.mount
+%{_unitdir}/fsverity-cert.service
 %{_sysconfdir}/firewalld/zones/hygarde-{w,l}an.xml
 %{_sharedstatedir}/rp-firstboot/50-postgres.sh
 %{_sharedstatedir}/rp-firstboot/80-disable-ssh.sh
@@ -53,6 +55,9 @@ firewall-cmd --reload || true
 firewall-cmd --reload || true
 
 %changelog
+* Mon Mar 9 2026 Valentin Geffroy <valentin.geffroy@iot.bzh> - 1.2.4
+- Add systemd unit to load fsverity cert
+
 * Mon Mar 9 2026 Sebastien Douheret <sebastien.douheret@iot.bzh > - 1.2.3
 - Disable ssh as root
 
