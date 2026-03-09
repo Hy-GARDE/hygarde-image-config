@@ -1,0 +1,12 @@
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=Initializes PostgreSQL cluster for HyGARDE
+After=systemd-user-sessions.service
+ConditionPathExists=!/etc/systemd/system/postgresql@hygarde.service.d/30-postgresql-setup.conf
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/postgresql-hygarde-init
+ExecStartPost=/usr/bin/systemctl disable postgresql-hygarde-init.service

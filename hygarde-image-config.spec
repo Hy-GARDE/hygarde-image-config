@@ -31,9 +31,10 @@ install -m 0644 systemd/realtime.slice %{buildroot}%{_unitdir}
 install -m 0644 systemd/var-tmp.mount %{buildroot}%{_unitdir}
 install -m 0644 systemd/fsverity-cert.service %{buildroot}%{_unitdir}
 install -D -m 0644 firewalld/* -t %{buildroot}%{_sysconfdir}/firewalld/zones/
-install -D -m 0755 firstboot/50-postgres.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 install -D -m 0755 firstboot/80-disable-ssh.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 install -D -m 0755 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
+install -D -m 0755 postgresql-hygarde-init -t %{buildroot}%{_sbindir}/
+install -m 0644 systemd/postgresql-hygarde-init.service %{buildroot}%{_unitdir}
 
 %files
 %{_unitdir}/afm-appli-helloworld-binding--main@.service.d/realtime.conf
@@ -44,9 +45,10 @@ install -D -m 0755 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstate
 %{_unitdir}/var-tmp.mount
 %{_unitdir}/fsverity-cert.service
 %{_sysconfdir}/firewalld/zones/hygarde-{w,l}an.xml
-%{_sharedstatedir}/rp-firstboot/50-postgres.sh
 %{_sharedstatedir}/rp-firstboot/80-disable-ssh.sh
 %{_sharedstatedir}/rp-firstboot/90-fsverity-config.sh
+%{_sbindir}/postgresql-hygarde-init
+%{_unitdir}/postgresql-hygarde-init.service
 
 %post
 firewall-cmd --reload || true
@@ -59,7 +61,7 @@ firewall-cmd --reload || true
 - systemd: Fix fsverity load of the certificate
 
 * Mon Mar 9 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.5
-- Fix PostgreSQL firstboot process
+- Fix PostgreSQL firstboot process (Smack label, move from rp-firstboot to its own service)
 
 * Mon Mar 9 2026 Valentin Geffroy <valentin.geffroy@iot.bzh> - 1.2.4
 - Add systemd unit to load fsverity cert
