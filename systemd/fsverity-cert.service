@@ -1,9 +1,12 @@
 [Unit]
 Description=Store fsverity certificate in Kernel keyrings
+Before=multi-user.target
+After=local-fs.target
+ConditionPathExists=/etc/fsverity/cert.der
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c "/usr/bin/keyctl padd asymmetric '' %keyring:.fs-verity < /etc/fsverity/cert.der"
+ExecStart=/bin/sh -c "/usr/bin/keyctl padd asymmetric '' %%keyring:.fs-verity < /etc/fsverity/cert.der"
 
 [Install]
 WantedBy=multi-user.target

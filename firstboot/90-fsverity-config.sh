@@ -20,15 +20,21 @@ set -euo pipefail
 FILES_TO_PROTECT="
 /etc/firewalld/firewalld.conf
 /etc/chrony.conf
-/etc/passwd
-/etc/group
-/etc/shadow
 /etc/sudoers
-/etc/fstab
 /etc/yum.repos.d/hygarde_dfb1e502--redpesk-lts-corn-3.0-update-build.repo
 /etc/yum.repos.d/hygarde-hummingboard_5a46cd3a--redpesk-lts-corn-3.0-update-build.repo
 /etc/yum.repos.d/redpesk.repo
 "
+
+# Enabling fsverity on these files require an initramfs
+# since systemd-remount-fs.service and systemd-sysusers.service
+# are looking to these files (so the systemd unit which loads
+# the certificate used for fs-verity must be loaded before
+# systemd-remount-fs.service but it is not possible).
+# /etc/fstab
+# /etc/passwd
+# /etc/shadow
+# /etc/group
 
 # Add PostgreSQL files if exist
 PG_BASE="/data/pgsql"

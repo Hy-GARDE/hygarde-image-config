@@ -1,5 +1,5 @@
 Name: hygarde-image-config
-Version: 1.2.5
+Version: 1.2.6
 Release: 0%{?dist}
 Summary: HyGARDE Hummingboard configuration
 
@@ -55,6 +55,9 @@ firewall-cmd --reload || true
 firewall-cmd --reload || true
 
 %changelog
+* Mon Mar 9 2026 Valentin Geffroy <valentin.geffroy@iot.bzh> - 1.2.6
+- systemd: Fix fsverity load of the certificate
+
 * Mon Mar 9 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.5
 - Fix PostgreSQL firstboot process
 
