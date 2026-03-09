@@ -12,6 +12,7 @@ echo "firstboot PostgreSQL: create data dir"
 mkdir -p /data/pgsql/data
 chown --recursive postgres:postgres /data/pgsql
 chmod --recursive 700 /data/pgsql
+chsmack --recursive --access System /data/pgsql
 
 # init and tune database
 echo "firstboot PostgreSQL: init and tune cluster"
@@ -21,7 +22,7 @@ timescaledb-tune -yes -conf-path /data/pgsql/data/postgresql.conf
 
 # apply changes
 echo "firstboot PostgreSQL: apply changes and remove tools"
-systemctl restart postgresql@hygarde
+systemctl start postgresql@hygarde
 # equivalent of `dnf remove timescaledb-tune`
 rpm -v -e timescaledb-tune keyutils-libs-devel krb5-devel libcom_err-devel libicu-devel libkadm5 libselinux-devel libsepol-devel libverto-devel openssl-devel pcre2-devel pcre2-utf16 pcre2-utf32 postgresql-private-devel postgresql-server-devel
 
