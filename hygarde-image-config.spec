@@ -1,5 +1,5 @@
 Name: hygarde-image-config
-Version: 1.2.6
+Version: 1.2.7
 Release: 0%{?dist}
 Summary: HyGARDE Hummingboard configuration
 
@@ -35,6 +35,7 @@ install -D -m 0755 firstboot/80-disable-ssh.sh -t %{buildroot}%{_sharedstatedir}
 install -D -m 0755 firstboot/90-fsverity-config.sh -t %{buildroot}%{_sharedstatedir}/rp-firstboot/
 install -D -m 0755 postgresql-hygarde-init -t %{buildroot}%{_sbindir}/
 install -m 0644 systemd/postgresql-hygarde-init.service %{buildroot}%{_unitdir}
+install -D -m 0644 networkd/* -t %{buildroot}%{_sysconfdir}/systemd/network/
 
 %files
 %{_unitdir}/afm-appli-helloworld-binding--main@.service.d/realtime.conf
@@ -49,6 +50,7 @@ install -m 0644 systemd/postgresql-hygarde-init.service %{buildroot}%{_unitdir}
 %{_sharedstatedir}/rp-firstboot/90-fsverity-config.sh
 %{_sbindir}/postgresql-hygarde-init
 %{_unitdir}/postgresql-hygarde-init.service
+%{_sysconfdir}/systemd/network/{end0,enp1s0}.network
 
 %post
 firewall-cmd --reload || true
@@ -57,6 +59,9 @@ firewall-cmd --reload || true
 firewall-cmd --reload || true
 
 %changelog
+* Tue Mar 17 2026 Louis-Baptiste Sobolewski <lb.sobolewski@iot.bzh> - 1.2.7
+- networkd configuration
+
 * Mon Mar 9 2026 Valentin Geffroy <valentin.geffroy@iot.bzh> - 1.2.6
 - systemd: Fix fsverity load of the certificate
 
